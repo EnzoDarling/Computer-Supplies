@@ -9,9 +9,9 @@ import java.text.*;
 public class Ventas extends javax.swing.JFrame {
  DefaultTableModel model;
  String codvent,numventa,codcli,codproduct,detallevent,cantventa,unitventa,totalventa,responventa,pagoventa;
- int preci=0;
+ /*int preci=0;
  int cant=0;
- int total=0;
+ int total=0;*/
  String precio,cantidad,tot;  
      public Ventas() {
         initComponents();

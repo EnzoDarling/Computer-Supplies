@@ -25,15 +25,15 @@ public class Clientes extends javax.swing.JFrame {
         //deshabilitar();
     }
     void limpiar(){
-        cli_num.setText("");
+        cli_dni.setText("");
         cli_ap.setText("");
         cli_nom.setText("");
         cli_tel.setText("");
     }
     void cargar(String valor){
-    String [] titulos={"Codigo","Nombre","Apellido","Telefono","IVA"};
+    String [] titulos={"DNI","Nombre","Apellido","Telefono","IVA"};
         String [] registros = new String[5];
-        String sql = "SELECT * FROM clientes WHERE cli_cod LIKE '%"+valor+"%' ORDER BY cli_cod ASC";
+        String sql = "SELECT * FROM clientes WHERE cli_dni LIKE '%"+valor+"%' ORDER BY cli_dni ASC";
         model = new DefaultTableModel (null,titulos);
         conectar cc=new conectar();
         Connection cn= cc.conexion();
@@ -41,7 +41,7 @@ public class Clientes extends javax.swing.JFrame {
         Statement st = cn.createStatement();
         ResultSet rs = st.executeQuery(sql);
         while (rs.next()){
-            registros[0]=rs.getString("cli_cod");
+            registros[0]=rs.getString("cli_dni");
             registros[1]=rs.getString("cli_nom");
             registros[2]=rs.getString("cli_ap");
             registros[3]=rs.getString("cli_tel");
@@ -58,12 +58,12 @@ public class Clientes extends javax.swing.JFrame {
         Connection cn= cc.conexion();
         
         String sql="";
-        cod=cli_num.getText();
+        cod=cli_dni.getText();
         ape=cli_ap.getText();
         nomb=cli_nom.getText();
         tel=cli_tel.getText();
         String ivarespon=combocli_iva.getSelectedItem().toString();
-        sql="INSERT INTO clientes (cli_cod, cli_nom, cli_ap, cli_tel, cli_iva) VALUES (?,?,?,?,?)";
+        sql="INSERT INTO clientes (cli_dni, cli_nom, cli_ap, cli_tel, cli_iva) VALUES (?,?,?,?,?)";
         try {
         PreparedStatement psd= cn.prepareStatement(sql);
         psd.setString(1,cod);
@@ -84,8 +84,8 @@ public class Clientes extends javax.swing.JFrame {
     void eliminar(){
         conectar cc=new conectar();
         Connection cn= cc.conexion();
-        cod=cli_num.getText();
-        String sql ="DELETE FROM clientes WHERE cli_cod=?";
+        cod=cli_dni.getText();
+        String sql ="DELETE FROM clientes WHERE cli_dni=?";
         int resp;
         resp = JOptionPane.showConfirmDialog(null,"¿Realmente desea eliminar?","Alerta!", JOptionPane.YES_NO_OPTION);
         if (resp == JOptionPane.YES_OPTION){
@@ -110,7 +110,7 @@ public class Clientes extends javax.swing.JFrame {
         cant=t_cantidad.getText();
         preci=t_precio.getText();
         iva=t_iva.getText();*/
-        String sql="UPDATE clientes SET cli_ap='"+cli_ap.getText()+"', cli_nom= '"+cli_nom.getText()+"', cli_tel='"+cli_tel.getText()+"', cli_iva='"+combocli_iva.getSelectedItem().toString()+"' WHERE cli_nom='"+cli_num.getText()+"'";
+        String sql="UPDATE clientes SET cli_ap='"+cli_ap.getText()+"', cli_nom= '"+cli_nom.getText()+"', cli_tel='"+cli_tel.getText()+"', cli_iva='"+combocli_iva.getSelectedItem().toString()+"' WHERE cli_dni='"+cli_dni.getText()+"'";
         int resp;
         resp = JOptionPane.showConfirmDialog(null,"¿Realmente desea modificar?","Alerta!", JOptionPane.YES_NO_OPTION);
         if(resp == JOptionPane.YES_OPTION){
@@ -129,7 +129,7 @@ public class Clientes extends javax.swing.JFrame {
         }
     }
     void habilitar(){
-        cli_num.setEnabled(true);
+        cli_dni.setEnabled(true);
         cli_ap.setEnabled(true);
         cli_nom.setEnabled(true);
         cli_tel.setEnabled(true);
@@ -159,7 +159,7 @@ public class Clientes extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cli_tel = new javax.swing.JTextField();
-        cli_num = new javax.swing.JTextField();
+        cli_dni = new javax.swing.JTextField();
         cli_nom = new javax.swing.JTextField();
         cli_ap = new javax.swing.JTextField();
         btn_cguardar = new javax.swing.JButton();
@@ -180,7 +180,7 @@ public class Clientes extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Personales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Nº Cliente");
+        jLabel1.setText("Nº de Documento");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Apellido");
@@ -275,7 +275,7 @@ public class Clientes extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_climpiar))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,13 +283,13 @@ public class Clientes extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel5)
                     .addComponent(jLabel1))
-                .addGap(84, 84, 84)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cli_tel, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                    .addComponent(cli_tel)
                     .addComponent(cli_nom)
                     .addComponent(cli_ap)
-                    .addComponent(cli_num))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cli_dni, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(66, 66, 66))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,7 +297,7 @@ public class Clientes extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(cli_num, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cli_dni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -312,9 +312,9 @@ public class Clientes extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cli_tel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_celiminar)
                     .addComponent(btn_nuevo))
@@ -382,12 +382,12 @@ public class Clientes extends javax.swing.JFrame {
                         .addComponent(btn_catras))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,7 +443,7 @@ public class Clientes extends javax.swing.JFrame {
     private void t_tabclientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_tabclientesMouseClicked
         int fila=t_tabclientes.getSelectedRow();
         if(fila>=0){
-                cli_num.setText(t_tabclientes.getValueAt(fila,0).toString());
+                cli_dni.setText(t_tabclientes.getValueAt(fila,0).toString());
                 cli_ap.setText(t_tabclientes.getValueAt(fila,1).toString());
                 cli_nom.setText(t_tabclientes.getValueAt(fila,2).toString());
                 cli_tel.setText(t_tabclientes.getValueAt(fila,3).toString());
@@ -495,8 +495,8 @@ public class Clientes extends javax.swing.JFrame {
     private javax.swing.JButton btn_nuevo;
     private javax.swing.JTextField cli_ap;
     private javax.swing.JTextField cli_buscar;
+    private javax.swing.JTextField cli_dni;
     private javax.swing.JTextField cli_nom;
-    private javax.swing.JTextField cli_num;
     private javax.swing.JTextField cli_tel;
     private javax.swing.JComboBox combocli_iva;
     private javax.swing.JLabel jLabel1;

@@ -33,7 +33,6 @@ public class Principal extends javax.swing.JFrame {
         btnproductos = new javax.swing.JButton();
         btnclientes = new javax.swing.JButton();
         btnventas = new javax.swing.JButton();
-        probarconex = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,38 +57,28 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        probarconex.setText("Probar Conexión");
-        probarconex.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                probarconexActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnventas, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                    .addComponent(btnclientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnproductos, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                    .addComponent(probarconex, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(283, Short.MAX_VALUE))
+                .addComponent(btnproductos, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnclientes, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(btnventas, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnproductos, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnclientes, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnventas, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                .addComponent(probarconex, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnproductos, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnclientes, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnventas, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(243, Short.MAX_VALUE))
         );
 
         pack();
@@ -112,17 +101,6 @@ public class Principal extends javax.swing.JFrame {
         vent.setVisible(true);
         this.dispose();*/
     }//GEN-LAST:event_btnventasActionPerformed
-
-    private void probarconexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_probarconexActionPerformed
-        try {
-            conectar cc= new conectar();
-            Connection cn= cc.conexion();
-            JOptionPane.showMessageDialog(null,"Conexión establecida");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Error en la conexión:" +e);
-        }
-        
-    }//GEN-LAST:event_probarconexActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,6 +141,5 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnclientes;
     private javax.swing.JButton btnproductos;
     private javax.swing.JButton btnventas;
-    private javax.swing.JButton probarconex;
     // End of variables declaration//GEN-END:variables
 }
